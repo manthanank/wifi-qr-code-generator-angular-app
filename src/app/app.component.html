@@ -1,0 +1,33 @@
+<h1>WiFi QR Code Generator App</h1>
+
+<form (submit)="makeCode()">
+  <label>
+    SSID:
+    <input type="text" [(ngModel)]="ssid" name="ssid" placeholder="Enter the name of your WiFi network">
+  </label>
+  <br>
+  <label>
+    Password:
+    <input type="password" [(ngModel)]="password" name="password" placeholder="Enter the password of your WiFi network">
+  </label>
+  <br>
+  <label>
+    Authentication Type:
+    <select [(ngModel)]="auth" name="auth">
+      <option value="WPA">WPA/WPA2</option>
+      <option value="WEP">WEP</option>
+      <option value="nopass">No Password</option>
+    </select>
+  </label>
+  <br>
+  <button type="submit" [disabled]="isButtonDisabled()">Generate QR Code</button>
+</form>
+
+@if (!wifiString){
+<p>Enter the text to generate QR code</p>
+}
+@else{
+<div class="qr-code-container">
+  <qr-code [value]="wifiString" size="300" errorCorrectionLevel="M" class="qr-code"></qr-code>
+</div>
+}
